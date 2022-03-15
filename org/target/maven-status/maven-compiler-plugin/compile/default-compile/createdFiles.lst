@@ -1,0 +1,9 @@
+com\configuration\ApplicationInitializer.class
+com\configuration\WebConfig.class
+com\configuration\DatabaseConfig.class
+com\model\Studio.class
+com\repository\StudioRepository.class
+com\controller\StudioController.class
+com\model\Actor.class
+com\service\StudioService.class
+com\model\Anime.class

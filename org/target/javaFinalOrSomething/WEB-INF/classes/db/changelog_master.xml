@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                      http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.6.xsd">
+
+    <changeSet id="1" author="Robbie">
+        <preConditions>
+            <not>
+                <tableExists tableName="Anime"/>
+                <tableExists tableName="Studio"/>
+                <tableExists tableName="Actor"/>
+                <tableExists tableName="Anime-Actor"/>
+            </not>
+        </preConditions>
+
+        <createTable tableName="Studio">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="founded" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="headquarters" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="varchar(10)">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="Anime">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="studio_id" type="int">
+                <constraints foreignKeyName="id" nullable="false"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="critic_score" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="release_date" type="datetime">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="Anime" baseColumnNames="studio_id" constraintName="Studio_Anime_FK" referencedTableName="Studio"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+
+        <createTable tableName="Actor">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false"/>
+            </column>
+            <column name="birth_place" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="age" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <createTable tableName="Anime-Actor">
+            <column name="actor_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+            <column name="anime_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="actor_id" constraintName="Anime-Actor-ActorFK" referencedTableName="Actor"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+        <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="anime_id" constraintName="Anime-Actor-AnimeFK" referencedTableName="Anime"
+                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+    </changeSet>
+</databaseChangeLog>
