@@ -86,4 +86,11 @@
         <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="anime_id" constraintName="Anime-Actor-AnimeFK" referencedTableName="Anime"
                                  referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
     </changeSet>
+
+    <changeSet id="2" author="Madlyaza">
+        <preConditions>
+            <tableExists tableName="Anime"/>
+        </preConditions>
+        <modifyDataType tableName="Anime" columnName="release_date" newDataType="date"/>
+    </changeSet>
 </databaseChangeLog>

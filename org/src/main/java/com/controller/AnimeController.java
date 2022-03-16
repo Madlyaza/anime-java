@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @CrossOrigin()
@@ -24,7 +25,7 @@ public class AnimeController
     }
 
     @GetMapping()
-    public ResponseEntity<List<Anime>> getActors()
+    public ResponseEntity<Set<Anime>> getActors()
     {
         return new ResponseEntity<>(animeService.getAnime(), HttpStatus.OK);
     }

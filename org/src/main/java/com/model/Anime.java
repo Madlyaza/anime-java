@@ -30,6 +30,6 @@ public class Anime
     private Integer critic_score;
 
     @Column(name = "release_date", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone = "CET")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "CET")
     private Date release_date;
 }

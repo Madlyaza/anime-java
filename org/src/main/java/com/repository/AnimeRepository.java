@@ -8,6 +8,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
 import java.util.List;
+import java.util.Set;
 
 @Repository
 @Transactional
@@ -21,10 +22,10 @@ public class AnimeRepository
      *
      * @return response entity with list of all anime
      */
-    public List<Anime> getAnimes()
+    public Set<Anime> getAnimes()
     {
         TypedQuery<Anime> query = manager.createQuery("SELECT g FROM Anime g", Anime.class);
-        return query.getResultList();
+        return (Set<Anime>) query.getResultList();
     }
 
     /**

@@ -23,7 +23,7 @@ public class Studio
     private String name;
 
     @Column(name = "founded", nullable = false)
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy HH:mm:ss", timezone = "CET")
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "CET")
     private Date founded;
 
     @NotNull

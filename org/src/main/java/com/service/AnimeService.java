@@ -9,6 +9,7 @@ import com.repository.AnimeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class AnimeService
@@ -20,7 +21,7 @@ public class AnimeService
         this.animeRepository = animeRepository;
     }
 
-    public List<Anime> getAnime()
+    public Set<Anime> getAnime()
     {
         return animeRepository.getAnimes();
     }
