@@ -3,32 +3,31 @@ package com.service;
 import com.exception.BadRequestException;
 import com.exception.DataNotFoundException;
 import com.exception.NoContentException;
-import com.model.Studio;
-import com.repository.StudioRepository;
+import com.model.Actor;
+import com.repository.ActorRepository;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 
 @Service
-public class StudioService
+public class ActorService
 {
-    private final StudioRepository studioRepository;
+    private final ActorRepository actorRepository;
 
-    public StudioService (StudioRepository studioRepository)
+    public ActorService (ActorRepository actorRepository)
     {
-        this.studioRepository = studioRepository;
+        this.actorRepository = actorRepository;
     }
 
-    public List<Studio> getStudios()
+    public List<Actor> getActors()
     {
-        return studioRepository.getStudios();
+        return actorRepository.getActors();
     }
 
-    public Studio getStudioById(Integer id)
+    public Actor getActorsById(Integer id)
     {
         try
         {
-            return studioRepository.getStudioById(id);
+            return actorRepository.getActorById(id);
         }
         catch (Exception ex)
         {
@@ -36,11 +35,11 @@ public class StudioService
         }
     }
 
-    public Studio createStudio(Studio studio)
+    public Actor createActor(Actor actor)
     {
         try
         {
-            return studioRepository.uploadStudio(studio);
+            return actorRepository.uploadActor(actor);
         }
         catch (Exception ex)
         {
@@ -48,11 +47,11 @@ public class StudioService
         }
     }
 
-    public Studio deleteStudio(Integer id)
+    public Actor deleteActor(Integer id)
     {
         try
         {
-            return studioRepository.deleteStudio(id);
+            return actorRepository.deleteActor(id);
         }
         catch (Exception ex)
         {
@@ -60,11 +59,11 @@ public class StudioService
         }
     }
 
-    public Studio updateStudio(Studio studio, Integer id)
+    public Actor updateActor(Actor actor, Integer id)
     {
         try
         {
-            return studioRepository.updateStudio(studio, id);
+            return actorRepository.updateActor(actor, id);
         }
         catch (Exception ex)
         {

@@ -22,8 +22,34 @@ public class StudioController
     }
 
     @GetMapping()
-    public ResponseEntity<List<Studio>> getStudio()
+    public ResponseEntity<List<Studio>> getStudios()
     {
         return new ResponseEntity<>(studioService.getStudios(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Studio> getStudioById(@PathVariable Integer id)
+    {
+        return new ResponseEntity<>(studioService.getStudioById(id), HttpStatus.OK);
+    }
+
+    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Studio> createStudio(@RequestBody Studio studio)
+    {
+        return new ResponseEntity<>(studioService.createStudio(studio), HttpStatus.OK);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Studio> deleteStudio(@PathVariable Integer id)
+    {
+        return new ResponseEntity<>(studioService.deleteStudio(id), HttpStatus.OK);
+    }
+
+    @PutMapping(value = "/{id}",
+            consumes = MediaType.APPLICATION_JSON_VALUE,
+            produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<Studio> updateStudio(@PathVariable Integer id, @RequestBody Studio studio)
+    {
+        return new ResponseEntity<>(studioService.updateStudio(studio, id), HttpStatus.OK);
     }
 }

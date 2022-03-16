@@ -3,32 +3,33 @@ package com.service;
 import com.exception.BadRequestException;
 import com.exception.DataNotFoundException;
 import com.exception.NoContentException;
-import com.model.Studio;
-import com.repository.StudioRepository;
+import com.model.Actor;
+import com.model.Anime;
+import com.repository.AnimeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
-public class StudioService
+public class AnimeService
 {
-    private final StudioRepository studioRepository;
+    private final AnimeRepository animeRepository;
 
-    public StudioService (StudioRepository studioRepository)
+    public AnimeService (AnimeRepository animeRepository)
     {
-        this.studioRepository = studioRepository;
+        this.animeRepository = animeRepository;
     }
 
-    public List<Studio> getStudios()
+    public List<Anime> getAnime()
     {
-        return studioRepository.getStudios();
+        return animeRepository.getAnimes();
     }
 
-    public Studio getStudioById(Integer id)
+    public Anime getAnimeById(Integer id)
     {
         try
         {
-            return studioRepository.getStudioById(id);
+            return animeRepository.getAnimeById(id);
         }
         catch (Exception ex)
         {
@@ -36,11 +37,11 @@ public class StudioService
         }
     }
 
-    public Studio createStudio(Studio studio)
+    public Anime createAnime(Anime anime)
     {
         try
         {
-            return studioRepository.uploadStudio(studio);
+            return animeRepository.uploadAnime(anime);
         }
         catch (Exception ex)
         {
@@ -48,11 +49,11 @@ public class StudioService
         }
     }
 
-    public Studio deleteStudio(Integer id)
+    public Anime deleteAnime(Integer id)
     {
         try
         {
-            return studioRepository.deleteStudio(id);
+            return animeRepository.deleteAnime(id);
         }
         catch (Exception ex)
         {
@@ -60,11 +61,11 @@ public class StudioService
         }
     }
 
-    public Studio updateStudio(Studio studio, Integer id)
+    public Anime updateAnime(Anime anime, Integer id)
     {
         try
         {
-            return studioRepository.updateStudio(studio, id);
+            return animeRepository.updateAnime(anime, id);
         }
         catch (Exception ex)
         {
