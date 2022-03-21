@@ -23,7 +23,7 @@ public class DatabaseConfig
     {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
-        ds.setUrl("jdbc:mysql://127.0.0.1:3306/anime");
+        ds.setUrl("jdbc:mysql://127.0.0.1:3306/animeDatabase");
         ds.setUsername("root");
         ds.setPassword("");
 

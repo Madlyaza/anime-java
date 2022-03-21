@@ -35,9 +35,7 @@ public class StudioRepository
      */
     public Studio getStudioById(Integer id)
     {
-        TypedQuery<Studio> query = manager.createQuery("SELECT g FROM Studio WHERE id = :id", Studio.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        return manager.find(Studio.class, id);
     }
 
     /**

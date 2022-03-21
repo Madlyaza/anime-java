@@ -1,6 +1,7 @@
 package com.repository;
 
 import com.model.Actor;
+import com.model.Anime;
 import com.model.Studio;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,7 +25,7 @@ public class ActorRepository
      */
     public List<Actor> getActors()
     {
-        TypedQuery<Actor> query = manager.createQuery("SELECT g FROM Actor g", Actor.class);
+        TypedQuery<Actor> query = manager.createQuery("SELECT DISTINCT ac FROM Actor ac JOIN ac.animes an order by an.id desc", Actor.class);
         return query.getResultList();
     }
 
@@ -36,7 +37,7 @@ public class ActorRepository
      */
     public Actor getActorById(Integer id)
     {
-        TypedQuery<Actor> query = manager.createQuery("SELECT g FROM Actor WHERE id = :id", Actor.class);
+        TypedQuery<Actor> query = manager.createQuery("SELECT DISTINCT ac FROM Actor ac JOIN FETCH ac.animes an WHERE an.id = :id", Actor.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }

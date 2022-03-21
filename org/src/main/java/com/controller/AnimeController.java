@@ -25,25 +25,25 @@ public class AnimeController
     }
 
     @GetMapping()
-    public ResponseEntity<Set<Anime>> getActors()
+    public ResponseEntity<List<Anime>> getAnime()
     {
         return new ResponseEntity<>(animeService.getAnime(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Anime> getActorByID(@PathVariable Integer id)
+    public ResponseEntity<Anime> getAnimeByID(@PathVariable Integer id)
     {
         return new ResponseEntity<>(animeService.getAnimeById(id), HttpStatus.OK);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anime> createActor(@RequestBody Anime anime)
+    public ResponseEntity<Anime> createAnime(@RequestBody Anime anime)
     {
         return new ResponseEntity<>(animeService.createAnime(anime), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Anime> deleteActor(@PathVariable Integer id)
+    public ResponseEntity<Anime> deleteAnime(@PathVariable Integer id)
     {
         return new ResponseEntity<>(animeService.deleteAnime(id), HttpStatus.OK);
     }
@@ -51,7 +51,7 @@ public class AnimeController
     @PutMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anime> updateActor(@PathVariable Integer id, @RequestBody Anime anime)
+    public ResponseEntity<Anime> updateAnime(@PathVariable Integer id, @RequestBody Anime anime)
     {
         return new ResponseEntity<>(animeService.updateAnime(anime, id), HttpStatus.OK);
     }

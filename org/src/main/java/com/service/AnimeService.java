@@ -21,7 +21,7 @@ public class AnimeService
         this.animeRepository = animeRepository;
     }
 
-    public Set<Anime> getAnime()
+    public List<Anime> getAnime()
     {
         return animeRepository.getAnimes();
     }

@@ -22,10 +22,10 @@ public class AnimeRepository
      *
      * @return response entity with list of all anime
      */
-    public Set<Anime> getAnimes()
+    public List<Anime> getAnimes()
     {
-        TypedQuery<Anime> query = manager.createQuery("SELECT g FROM Anime g", Anime.class);
-        return (Set<Anime>) query.getResultList();
+        TypedQuery<Anime> query = manager.createQuery("SELECT DISTINCT an FROM Anime  an JOIN FETCH an.actors ac order by ac.id desc", Anime.class);
+        return query.getResultList();
     }
 
     /**
@@ -36,7 +36,7 @@ public class AnimeRepository
      */
     public Anime getAnimeById(Integer id)
     {
-        TypedQuery<Anime> query = manager.createQuery("SELECT g FROM Anime WHERE id = :id", Anime.class);
+        TypedQuery<Anime> query = manager.createQuery("SELECT DISTINCT an FROM Anime an JOIN FETCH an.actors ac WHERE ac.id = :id", Anime.class);
         query.setParameter("id", id);
         return query.getSingleResult();
     }

@@ -82,9 +82,9 @@
         </createTable>
 
         <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="actor_id" constraintName="Anime-Actor-ActorFK" referencedTableName="Actor"
-                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+                                 referencedColumnNames="id"/>
         <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="anime_id" constraintName="Anime-Actor-AnimeFK" referencedTableName="Anime"
-                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+                                 referencedColumnNames="id"/>
     </changeSet>
 
     <changeSet id="2" author="Madlyaza">
