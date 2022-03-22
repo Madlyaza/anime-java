@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
 
 @Repository
@@ -25,7 +27,7 @@ public class ActorRepository
      */
     public List<Actor> getActors()
     {
-        TypedQuery<Actor> query = manager.createQuery("SELECT DISTINCT ac FROM Actor ac JOIN ac.animes an order by an.id desc", Actor.class);
+        TypedQuery<Actor> query = manager.createQuery("SELECT g FROM Actor g", Actor.class);
         return query.getResultList();
     }
 
@@ -37,9 +39,7 @@ public class ActorRepository
      */
     public Actor getActorById(Integer id)
     {
-        TypedQuery<Actor> query = manager.createQuery("SELECT DISTINCT ac FROM Actor ac JOIN FETCH ac.animes an WHERE an.id = :id", Actor.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        return manager.find(Actor.class, id);
     }
 
     /**

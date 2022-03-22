@@ -72,19 +72,19 @@
             </column>
         </createTable>
 
-        <createTable tableName="Anime-Actor">
-            <column name="actor_id" type="int">
-                <constraints nullable="false"/>
-            </column>
-            <column name="anime_id" type="int">
-                <constraints nullable="false"/>
-            </column>
-        </createTable>
+<!--        <createTable tableName="Anime-Actor">-->
+<!--            <column name="actor_id" type="int">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--            <column name="anime_id" type="int">-->
+<!--                <constraints nullable="false"/>-->
+<!--            </column>-->
+<!--        </createTable>-->
 
-        <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="actor_id" constraintName="Anime-Actor-ActorFK" referencedTableName="Actor"
-                                 referencedColumnNames="id"/>
-        <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="anime_id" constraintName="Anime-Actor-AnimeFK" referencedTableName="Anime"
-                                 referencedColumnNames="id"/>
+<!--        <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="actor_id" constraintName="Anime-Actor-ActorFK" referencedTableName="Actor"-->
+<!--                                 referencedColumnNames="id"/>-->
+<!--        <addForeignKeyConstraint baseTableName="Anime-Actor" baseColumnNames="anime_id" constraintName="Anime-Actor-AnimeFK" referencedTableName="Anime"-->
+<!--                                 referencedColumnNames="id"/>-->
     </changeSet>
 
     <changeSet id="2" author="Madlyaza">
@@ -92,5 +92,33 @@
             <tableExists tableName="Anime"/>
         </preConditions>
         <modifyDataType tableName="Anime" columnName="release_date" newDataType="date"/>
+    </changeSet>
+
+    <changeSet id="3" author="Madlyaza">
+        <preConditions>
+            <not>
+                <tableExists tableName="FeaturedIn"/>
+            </not>
+        </preConditions>
+        <createTable tableName="FeaturedIn">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints primaryKey="true"/>
+            </column>
+            <column name="anime_name" type="varchar(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="actor_id" type="int">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+        <addForeignKeyConstraint baseTableName="FeaturedIn" baseColumnNames="actor_id" constraintName="featured_actor_FK" referencedTableName="Actor"
+                                 referencedColumnNames="id"/>
+        <addUniqueConstraint tableName="anime" columnNames="name"/>
+    </changeSet>
+
+    <changeSet id="4" author="Madlyaza">
+        <addForeignKeyConstraint baseTableName="featuredin" baseColumnNames="anime_name" constraintName="anime_name_FK"
+                                 referencedTableName="anime"
+                                 referencedColumnNames="name"/>
     </changeSet>
 </databaseChangeLog>

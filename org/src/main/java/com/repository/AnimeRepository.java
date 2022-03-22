@@ -1,12 +1,17 @@
 package com.repository;
 
+import com.model.Actor;
 import com.model.Anime;
+import com.model.Studio;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.sound.midi.SysexMessage;
 import java.util.List;
 import java.util.Set;
 
@@ -24,7 +29,7 @@ public class AnimeRepository
      */
     public List<Anime> getAnimes()
     {
-        TypedQuery<Anime> query = manager.createQuery("SELECT DISTINCT an FROM Anime  an JOIN FETCH an.actors ac order by ac.id desc", Anime.class);
+        TypedQuery<Anime> query = manager.createQuery("SELECT g FROM Anime g", Anime.class);
         return query.getResultList();
     }
 
@@ -36,9 +41,7 @@ public class AnimeRepository
      */
     public Anime getAnimeById(Integer id)
     {
-        TypedQuery<Anime> query = manager.createQuery("SELECT DISTINCT an FROM Anime an JOIN FETCH an.actors ac WHERE ac.id = :id", Anime.class);
-        query.setParameter("id", id);
-        return query.getSingleResult();
+        return manager.find(Anime.class, id);
     }
 
     /**
@@ -49,6 +52,8 @@ public class AnimeRepository
      */
     public Anime uploadAnime(Anime anime)
     {
+        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        System.out.println(anime);
         manager.persist(anime);
         return anime;
     }

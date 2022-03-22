@@ -7,7 +7,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
@@ -22,11 +24,12 @@ public class Actor
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private long id;
 
-    @NotNull
+    @NotBlank
     private String name;
 
+    @Past
     @Column(name = "birth_date", nullable = false)
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "CET")
     private Date birth_date;
@@ -36,10 +39,4 @@ public class Actor
 
     @NotNull
     private Integer age;
-
-    @ManyToMany(cascade = { CascadeType.ALL })
-    @JoinTable(name = "anime-actor",
-            joinColumns = @JoinColumn(name = "actor_id"),
-            inverseJoinColumns = @JoinColumn(name = "anime_id"))
-    private Set<Anime> animes = new HashSet<Anime>();
 }
