@@ -77,6 +77,7 @@ public class ActorRepository
      */
     public Actor updateActor(Actor actor, Integer id)
     {
+        actor.setId(id);
         return manager.merge(actor);
     }
 }

@@ -24,7 +24,7 @@ public class Actor
 {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private int id;
 
     @NotBlank
     private String name;

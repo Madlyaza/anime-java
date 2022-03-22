@@ -1,14 +1,14 @@
 package com.controller;
 
-import com.model.Actor;
-import com.model.Anime;
-import com.service.ActorService;
+import com.dto.AnimeDTO;
 import com.service.AnimeService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.sound.midi.SysexMessage;
+import javax.validation.Valid;
 import java.util.List;
 import java.util.Set;
 
@@ -24,25 +24,30 @@ public class AnimeController
     }
 
     @GetMapping()
-    public ResponseEntity<List<Anime>> getAnime()
+    @ResponseBody
+    public ResponseEntity<List<AnimeDTO>> getAnime()
     {
         return new ResponseEntity<>(animeService.getAnime(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Anime> getAnimeByID(@PathVariable Integer id)
+    @ResponseBody
+    public ResponseEntity<AnimeDTO> getAnimeByID(@PathVariable Integer id)
     {
         return new ResponseEntity<>(animeService.getAnimeById(id), HttpStatus.OK);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anime> createAnime(@RequestBody Anime anime)
+    @ResponseBody
+    public ResponseEntity<AnimeDTO> createAnime(@RequestBody AnimeDTO animeDTO)
     {
-        return new ResponseEntity<>(animeService.createAnime(anime), HttpStatus.OK);
+        System.out.println("-------------------------------------------");
+        System.out.println(animeDTO);
+        return new ResponseEntity<>(animeService.createAnime(animeDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Anime> deleteAnime(@PathVariable Integer id)
+    public ResponseEntity<AnimeDTO> deleteAnime(@PathVariable Integer id)
     {
         return new ResponseEntity<>(animeService.deleteAnime(id), HttpStatus.OK);
     }
@@ -50,8 +55,8 @@ public class AnimeController
     @PutMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Anime> updateAnime(@PathVariable Integer id, @RequestBody Anime anime)
+    public ResponseEntity<AnimeDTO> updateAnime(@PathVariable Integer id, @RequestBody AnimeDTO animeDTO)
     {
-        return new ResponseEntity<>(animeService.updateAnime(anime, id), HttpStatus.OK);
+        return new ResponseEntity<>(animeService.updateAnime(animeDTO, id), HttpStatus.OK);
     }
 }

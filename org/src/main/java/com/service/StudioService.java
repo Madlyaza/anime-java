@@ -1,9 +1,7 @@
 package com.service;
 
-import com.exception.BadRequestException;
-import com.exception.DataNotFoundException;
-import com.exception.NoContentException;
-import com.model.Studio;
+import com.dto.StudioDTO;
+import com.mapper.StudioMapper;
 import com.repository.StudioRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,62 +11,64 @@ import java.util.List;
 public class StudioService
 {
     private final StudioRepository studioRepository;
+    private final StudioMapper studioMapper;
 
-    public StudioService (StudioRepository studioRepository)
+    public StudioService (StudioRepository studioRepository, StudioMapper studioMapper)
     {
         this.studioRepository = studioRepository;
+        this.studioMapper = studioMapper;
     }
 
-    public List<Studio> getStudios()
+    public List<StudioDTO> getStudios()
     {
-        return studioRepository.getStudios();
+        return studioMapper.mapFromEntityList(studioRepository.getStudios());
     }
 
-    public Studio getStudioById(Integer id)
+    public StudioDTO getStudioById(Integer id)
     {
-        try
-        {
-            return studioRepository.getStudioById(id);
-        }
-        catch (Exception ex)
-        {
-            throw new DataNotFoundException("id: " + id);
-        }
+//        try
+//        {
+            return studioMapper.mapFromEntity(studioRepository.getStudioById(id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new DataNotFoundException("id: " + id);
+//        }
     }
 
-    public Studio createStudio(Studio studio)
+    public StudioDTO createStudio(StudioDTO studioDTO)
     {
-        try
-        {
-            return studioRepository.uploadStudio(studio);
-        }
-        catch (Exception ex)
-        {
-            throw new BadRequestException();
-        }
+//        try
+//        {
+            return studioMapper.mapFromEntity(studioRepository.uploadStudio(studioMapper.mapToEntity(studioDTO)));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new BadRequestException();
+//        }
     }
 
-    public Studio deleteStudio(Integer id)
+    public StudioDTO deleteStudio(Integer id)
     {
-        try
-        {
-            return studioRepository.deleteStudio(id);
-        }
-        catch (Exception ex)
-        {
-            throw new NoContentException("id: " + id);
-        }
+//        try
+//        {
+            return studioMapper.mapFromEntity(studioRepository.deleteStudio(id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new NoContentException("id: " + id);
+//        }
     }
 
-    public Studio updateStudio(Studio studio, Integer id)
+    public StudioDTO updateStudio(StudioDTO studioDTO, Integer id)
     {
-        try
-        {
-            return studioRepository.updateStudio(studio, id);
-        }
-        catch (Exception ex)
-        {
-            throw new BadRequestException();
-        }
+//        try
+//        {
+            return studioMapper.mapFromEntity(studioRepository.updateStudio(studioMapper.mapToEntity(studioDTO), id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new BadRequestException();
+//        }
     }
 }

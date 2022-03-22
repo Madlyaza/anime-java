@@ -1,9 +1,7 @@
 package com.controller;
 
-import com.model.Actor;
-import com.model.Studio;
+import com.dto.ActorDTO;
 import com.service.ActorService;
-import com.service.StudioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -23,25 +21,25 @@ public class ActorController
     }
 
     @GetMapping()
-    public ResponseEntity<List<Actor>> getActors()
+    public ResponseEntity<List<ActorDTO>> getActors()
     {
         return new ResponseEntity<>(actorService.getActors(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Actor> getActorByID(@PathVariable Integer id)
+    public ResponseEntity<ActorDTO> getActorByID(@PathVariable Integer id)
     {
         return new ResponseEntity<>(actorService.getActorsById(id), HttpStatus.OK);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Actor> createActor(@RequestBody Actor actor)
+    public ResponseEntity<ActorDTO> createActor(@RequestBody ActorDTO actorDTO)
     {
-        return new ResponseEntity<>(actorService.createActor(actor), HttpStatus.OK);
+        return new ResponseEntity<>(actorService.createActor(actorDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Actor> deleteActor(@PathVariable Integer id)
+    public ResponseEntity<ActorDTO> deleteActor(@PathVariable Integer id)
     {
         return new ResponseEntity<>(actorService.deleteActor(id), HttpStatus.OK);
     }
@@ -49,8 +47,8 @@ public class ActorController
     @PutMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Actor> updateActor(@PathVariable Integer id, @RequestBody Actor actor)
+    public ResponseEntity<ActorDTO> updateActor(@PathVariable Integer id, @RequestBody ActorDTO actorDTO)
     {
-        return new ResponseEntity<>(actorService.updateActor(actor, id), HttpStatus.OK);
+        return new ResponseEntity<>(actorService.updateActor(actorDTO, id), HttpStatus.OK);
     }
 }

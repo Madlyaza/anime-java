@@ -81,6 +81,7 @@ public class AnimeRepository
      */
     public Anime updateAnime(Anime anime, Integer id)
     {
+        anime.setId(id);
         return manager.merge(anime);
     }
 }

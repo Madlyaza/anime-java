@@ -9,6 +9,7 @@ import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -16,9 +17,10 @@ import java.util.Properties;
 
 @EnableTransactionManagement
 @Configuration
+@EnableJpaRepositories("com.repository")
 public class DatabaseConfig
 {
-    @Bean(name = "dataSource")
+    @Bean
     public DataSource datasource()
     {
         DriverManagerDataSource ds = new DriverManagerDataSource();
@@ -31,7 +33,7 @@ public class DatabaseConfig
     }
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory()
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource)
     {
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setShowSql(true);
@@ -40,7 +42,7 @@ public class DatabaseConfig
         final LocalContainerEntityManagerFactoryBean em = new LocalContainerEntityManagerFactoryBean();
         em.setJpaVendorAdapter(vendorAdapter);
         em.setPackagesToScan("com.model");
-        em.setDataSource(datasource());
+        em.setDataSource(dataSource);
         em.setPersistenceUnitName("EmFactory");
         em.setJpaProperties(additionalProperties());
 
@@ -59,15 +61,15 @@ public class DatabaseConfig
     {
         Properties properties = new Properties();
         properties.setProperty("hibernate.hbm2ddl.auto", "none");
-        properties.setProperty("dialect", "org.hibernate.dialect.MySQLDialect");
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQLDialect");
         return properties;
     }
 
     @Bean
-    public SpringLiquibase liquibase()
+    public SpringLiquibase liquibase(DataSource dataSource)
     {
         SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setDataSource(datasource());
+        liquibase.setDataSource(dataSource);
         liquibase.setChangeLog("classpath:db/changelog_master.xml");
         return liquibase;
     }

@@ -1,9 +1,7 @@
 package com.service;
 
-import com.exception.BadRequestException;
-import com.exception.DataNotFoundException;
-import com.exception.NoContentException;
-import com.model.FeaturedIn;
+import com.dto.FeaturedInDTO;
+import com.mapper.FeaturedInMapper;
 import com.repository.FeaturedInRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,62 +11,64 @@ import java.util.List;
 public class FeaturedInService
 {
     private final FeaturedInRepository featuredInRepository;
+    private final FeaturedInMapper featuredInMapper;
 
-    public FeaturedInService (FeaturedInRepository featuredInRepository)
+    public FeaturedInService (FeaturedInRepository featuredInRepository, FeaturedInMapper featuredInMapper)
     {
         this.featuredInRepository = featuredInRepository;
+        this.featuredInMapper = featuredInMapper;
     }
 
-    public List<FeaturedIn> getFeatured()
+    public List<FeaturedInDTO> getFeatured()
     {
-        return featuredInRepository.getFeatured();
+        return featuredInMapper.mapFromEntityList(featuredInRepository.getFeatured());
     }
 
-    public FeaturedIn getFeaturedById(Integer id)
+    public FeaturedInDTO getFeaturedById(Integer id)
     {
-        try
-        {
-            return featuredInRepository.getFeaturedById(id);
-        }
-        catch (Exception ex)
-        {
-            throw new DataNotFoundException("id: " + id);
-        }
+//        try
+//        {
+            return featuredInMapper.mapFromEntity( featuredInRepository.getFeaturedById(id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new DataNotFoundException("id: " + id);
+//        }
     }
 
-    public FeaturedIn createFeatured(FeaturedIn featuredIn)
+    public FeaturedInDTO createFeatured(FeaturedInDTO featuredInDTO)
     {
-        try
-        {
-            return featuredInRepository.uploadFeatured(featuredIn);
-        }
-        catch (Exception ex)
-        {
-            throw new BadRequestException();
-        }
+//        try
+//        {
+            return featuredInMapper.mapFromEntity(featuredInRepository.uploadFeatured(featuredInMapper.mapToEntity(featuredInDTO)));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new BadRequestException();
+//        }
     }
 
-    public FeaturedIn deleteFeatured(Integer id)
+    public FeaturedInDTO deleteFeatured(Integer id)
     {
-        try
-        {
-            return featuredInRepository.deleteFeatured(id);
-        }
-        catch (Exception ex)
-        {
-            throw new NoContentException("id: " + id);
-        }
+//        try
+//        {
+            return featuredInMapper.mapFromEntity(featuredInRepository.deleteFeatured(id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new NoContentException("id: " + id);
+//        }
     }
 
-    public FeaturedIn updateFeatured(FeaturedIn featuredIn, Integer id)
+    public FeaturedInDTO updateFeatured(FeaturedInDTO featuredInDTO, Integer id)
     {
-        try
-        {
-            return featuredInRepository.updateFeatured(featuredIn, id);
-        }
-        catch (Exception ex)
-        {
-            throw new BadRequestException();
-        }
+//        try
+//        {
+            return featuredInMapper.mapFromEntity(featuredInRepository.updateFeatured(featuredInMapper.mapToEntity(featuredInDTO), id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new BadRequestException();
+//        }
     }
 }

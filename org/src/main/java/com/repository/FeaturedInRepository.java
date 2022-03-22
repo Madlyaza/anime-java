@@ -1,7 +1,5 @@
 package com.repository;
 
-import com.model.Actor;
-import com.model.Anime;
 import com.model.FeaturedIn;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -9,10 +7,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
 import java.util.List;
-import java.util.Set;
 
 @Repository
 @Transactional
@@ -78,6 +73,7 @@ public class FeaturedInRepository
      */
     public FeaturedIn updateFeatured(FeaturedIn featuredIn, Integer id)
     {
+        featuredIn.setId(id);
         return manager.merge(featuredIn);
     }
 }

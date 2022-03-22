@@ -52,7 +52,7 @@
         </createTable>
 
         <addForeignKeyConstraint baseTableName="Anime" baseColumnNames="studio_id" constraintName="Studio_Anime_FK" referencedTableName="Studio"
-                                 referencedColumnNames="id" onDelete="CASCADE" onUpdate="CASCADE"/>
+                                 referencedColumnNames="id"/>
 
         <createTable tableName="Actor">
             <column name="id" type="int" autoIncrement="true">
@@ -104,8 +104,8 @@
             <column name="id" type="int" autoIncrement="true">
                 <constraints primaryKey="true"/>
             </column>
-            <column name="anime_name" type="varchar(50)">
-                <constraints nullable="false" unique="true"/>
+            <column name="anime_id" type="int">
+                <constraints nullable="false"/>
             </column>
             <column name="actor_id" type="int">
                 <constraints nullable="false"/>
@@ -117,8 +117,8 @@
     </changeSet>
 
     <changeSet id="4" author="Madlyaza">
-        <addForeignKeyConstraint baseTableName="featuredin" baseColumnNames="anime_name" constraintName="anime_name_FK"
+        <addForeignKeyConstraint baseTableName="featuredin" baseColumnNames="anime_id" constraintName="anime_id_FK"
                                  referencedTableName="anime"
-                                 referencedColumnNames="name"/>
+                                 referencedColumnNames="id"/>
     </changeSet>
 </databaseChangeLog>

@@ -73,6 +73,7 @@ public class StudioRepository
      */
     public Studio updateStudio(Studio studio, Integer id)
     {
+        studio.setId(id);
         return manager.merge(studio);
     }
 }

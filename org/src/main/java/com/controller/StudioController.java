@@ -1,5 +1,6 @@
 package com.controller;
 
+import com.dto.StudioDTO;
 import com.model.Studio;
 import com.service.StudioService;
 import org.springframework.http.HttpStatus;
@@ -21,25 +22,25 @@ public class StudioController
     }
 
     @GetMapping()
-    public ResponseEntity<List<Studio>> getStudios()
+    public ResponseEntity<List<StudioDTO>> getStudios()
     {
         return new ResponseEntity<>(studioService.getStudios(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Studio> getStudioById(@PathVariable Integer id)
+    public ResponseEntity<StudioDTO> getStudioById(@PathVariable Integer id)
     {
         return new ResponseEntity<>(studioService.getStudioById(id), HttpStatus.OK);
     }
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Studio> createStudio(@RequestBody Studio studio)
+    public ResponseEntity<StudioDTO> createStudio(@RequestBody StudioDTO studioDTO)
     {
-        return new ResponseEntity<>(studioService.createStudio(studio), HttpStatus.OK);
+        return new ResponseEntity<>(studioService.createStudio(studioDTO), HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Studio> deleteStudio(@PathVariable Integer id)
+    public ResponseEntity<StudioDTO> deleteStudio(@PathVariable Integer id)
     {
         return new ResponseEntity<>(studioService.deleteStudio(id), HttpStatus.OK);
     }
@@ -47,8 +48,8 @@ public class StudioController
     @PutMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE,
             produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<Studio> updateStudio(@PathVariable Integer id, @RequestBody Studio studio)
+    public ResponseEntity<StudioDTO> updateStudio(@PathVariable Integer id, @RequestBody StudioDTO studioDTO)
     {
-        return new ResponseEntity<>(studioService.updateStudio(studio, id), HttpStatus.OK);
+        return new ResponseEntity<>(studioService.updateStudio(studioDTO, id), HttpStatus.OK);
     }
 }

@@ -1,10 +1,7 @@
 package com.service;
 
-import com.exception.BadRequestException;
-import com.exception.DataNotFoundException;
-import com.exception.NoContentException;
-import com.model.Actor;
-import com.model.Anime;
+import com.dto.AnimeDTO;
+import com.mapper.AnimeMapper;
 import com.repository.AnimeRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,62 +11,64 @@ import java.util.List;
 public class AnimeService
 {
     private final AnimeRepository animeRepository;
+    private final AnimeMapper animeMapper;
 
-    public AnimeService (AnimeRepository animeRepository)
+    public AnimeService (AnimeRepository animeRepository, AnimeMapper animeMapper)
     {
         this.animeRepository = animeRepository;
+        this.animeMapper = animeMapper;
     }
 
-    public List<Anime> getAnime()
+    public List<AnimeDTO> getAnime()
     {
-        return animeRepository.getAnimes();
+        return animeMapper.mapFromEntityList(animeRepository.getAnimes());
     }
 
-    public Anime getAnimeById(Integer id)
+    public AnimeDTO getAnimeById(Integer id)
     {
-        try
-        {
-            return animeRepository.getAnimeById(id);
-        }
-        catch (Exception ex)
-        {
-            throw new DataNotFoundException("id: " + id);
-        }
+//        try
+//        {
+            return animeMapper.mapFromEntity(animeRepository.getAnimeById(id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new DataNotFoundException("id: " + id);
+//        }
     }
 
-    public Anime createAnime(Anime anime)
+    public AnimeDTO createAnime(AnimeDTO animeDTO)
     {
-        try
-        {
-            return animeRepository.uploadAnime(anime);
-        }
-        catch (Exception ex)
-        {
-            throw new BadRequestException();
-        }
+//        try
+//        {
+            return animeMapper.mapFromEntity(animeRepository.uploadAnime(animeMapper.mapToEntity(animeDTO)));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new BadRequestException();
+//        }
     }
 
-    public Anime deleteAnime(Integer id)
+    public AnimeDTO deleteAnime(Integer id)
     {
-        try
-        {
-            return animeRepository.deleteAnime(id);
-        }
-        catch (Exception ex)
-        {
-            throw new NoContentException("id: " + id);
-        }
+//        try
+//        {
+            return animeMapper.mapFromEntity(animeRepository.deleteAnime(id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new NoContentException("id: " + id);
+//        }
     }
 
-    public Anime updateAnime(Anime anime, Integer id)
+    public AnimeDTO updateAnime(AnimeDTO animeDTO, Integer id)
     {
-        try
-        {
-            return animeRepository.updateAnime(anime, id);
-        }
-        catch (Exception ex)
-        {
-            throw new BadRequestException();
-        }
+//        try
+//        {
+            return animeMapper.mapFromEntity(animeRepository.updateAnime(animeMapper.mapToEntity(animeDTO), id));
+//        }
+//        catch (Exception ex)
+//        {
+//            throw new BadRequestException();
+//        }
     }
 }
