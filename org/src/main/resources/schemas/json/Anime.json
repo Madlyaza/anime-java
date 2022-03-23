@@ -1,0 +1,41 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$id": "/schemas/Anime",
+	"title": "Anime",
+	"type": "object",
+	"properties": {
+		"studio": {
+			"type": "object",
+			"properties": {
+				"id": {
+					"minimum": 1,
+					"type": "integer"
+				}
+			},
+			"additionalProperties": false,
+			"required": [
+				"id"
+			]
+		},
+		"name": {
+			"maxLength": 50,
+			"type": "string"
+		},
+		"critic_score": {
+			"type": "integer",
+			"minimum": 1,
+			"maximum": 10
+		},
+		"release_date": {
+			"pattern": "^[0-3][0-9]-[0-1][0-9]-[1-9][0-9][0-9][0-9]$",
+			"type": "string"
+		}
+	},
+	"additionalProperties": false,
+	"required": [
+		"studio",
+		"name",
+		"critic_score",
+		"release_date"
+	]
+}

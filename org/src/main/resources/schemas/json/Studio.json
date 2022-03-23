@@ -1,0 +1,31 @@
+{
+	"$schema": "http://json-schema.org/draft-04/schema#",
+	"$id": "/schemas/Studio",
+	"title": "Studio",
+	"type": "object",
+	"properties": {
+		"name": {
+			"maxLength": 50,
+			"type": "string"
+		},
+		"founded": {
+			"pattern": "^[0-3][0-9]-[0-1][0-9]-[1-9][0-9][0-9][0-9]$",
+			"type": "string"
+		},
+		"headquarters": {
+			"maxLength": 100,
+			"type": "string"
+		},
+		"type": {
+			"type": "string",
+			"enum": ["private", "public"]
+		}
+	},
+	"additionalProperties": false,
+	"required": [
+		"name",
+		"founded",
+		"headquarters",
+		"type"
+	]
+}
