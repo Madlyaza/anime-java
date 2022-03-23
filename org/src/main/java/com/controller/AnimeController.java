@@ -7,13 +7,10 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import javax.sound.midi.SysexMessage;
-import javax.validation.Valid;
 import java.util.List;
-import java.util.Set;
 
 @RestController
-@RequestMapping("/animes")
+@RequestMapping(value = "/json/animes", produces = MediaType.APPLICATION_JSON_VALUE)
 public class AnimeController
 {
     private final AnimeService animeService;
@@ -41,8 +38,6 @@ public class AnimeController
     @ResponseBody
     public ResponseEntity<AnimeDTO> createAnime(@RequestBody AnimeDTO animeDTO)
     {
-        System.out.println("-------------------------------------------");
-        System.out.println(animeDTO);
         return new ResponseEntity<>(animeService.createAnime(animeDTO), HttpStatus.OK);
     }
 

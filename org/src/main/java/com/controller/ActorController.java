@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/actors")
+@RequestMapping(value = "/json/actors", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ActorController
 {
     private final ActorService actorService;

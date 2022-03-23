@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/studios")
+@RequestMapping(value = "/json/studios", produces = MediaType.APPLICATION_JSON_VALUE)
 public class StudioController
 {
     private final StudioService studioService;

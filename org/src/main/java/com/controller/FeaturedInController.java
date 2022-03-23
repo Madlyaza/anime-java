@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/featured")
+@RequestMapping(value = "/json/featured", produces = MediaType.APPLICATION_JSON_VALUE)
 public class FeaturedInController
 {
     private final FeaturedInService featuredInService;
