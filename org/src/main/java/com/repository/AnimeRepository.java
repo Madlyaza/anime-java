@@ -2,6 +2,7 @@ package com.repository;
 
 import com.model.Actor;
 import com.model.Anime;
+import com.model.FeaturedIn;
 import com.model.Studio;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -53,6 +54,7 @@ public class AnimeRepository
     public Anime uploadAnime(Anime anime)
     {
         manager.persist(anime);
+        anime.setStudio(manager.find(Studio.class, anime.getStudio().getId()));
         return anime;
     }
 
@@ -79,7 +81,10 @@ public class AnimeRepository
      */
     public Anime updateAnime(Anime anime, Integer id)
     {
+        Studio studio = manager.find(Studio.class, anime.getStudio().getId());
+        anime.setStudio(studio);
         anime.setId(id);
+
         return manager.merge(anime);
     }
 }

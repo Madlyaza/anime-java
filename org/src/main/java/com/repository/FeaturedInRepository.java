@@ -1,5 +1,7 @@
 package com.repository;
 
+import com.model.Actor;
+import com.model.Anime;
 import com.model.FeaturedIn;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -73,6 +75,11 @@ public class FeaturedInRepository
      */
     public FeaturedIn updateFeatured(FeaturedIn featuredIn, Integer id)
     {
+        Actor actor = manager.find(Actor.class, featuredIn.getActor().getId());
+        Anime anime = manager.find(Anime.class, featuredIn.getAnime().getId());
+
+        featuredIn.setActor(actor);
+        featuredIn.setAnime(anime);
         featuredIn.setId(id);
         return manager.merge(featuredIn);
     }

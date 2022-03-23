@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 
 public class LocalDateDeserializer extends StdDeserializer<LocalDate>
 {
@@ -22,7 +23,8 @@ public class LocalDateDeserializer extends StdDeserializer<LocalDate>
     public LocalDate deserialize(JsonParser jp, DeserializationContext ctxt)
             throws IOException, JsonProcessingException
     {
-        return LocalDate.parse(jp.readValueAs(String.class));
+
+        return LocalDate.parse(jp.readValueAs(String.class), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
     }
 
 }
