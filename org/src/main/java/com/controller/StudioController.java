@@ -1,7 +1,6 @@
 package com.controller;
 
 import com.dto.StudioDTO;
-import com.model.Studio;
 import com.service.StudioService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -11,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/json/studios", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/studios", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class StudioController
 {
     private final StudioService studioService;
@@ -33,7 +32,7 @@ public class StudioController
         return new ResponseEntity<>(studioService.getStudioById(id), HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping()
     public ResponseEntity<StudioDTO> createStudio(@RequestBody StudioDTO studioDTO)
     {
         return new ResponseEntity<>(studioService.createStudio(studioDTO), HttpStatus.OK);
@@ -45,9 +44,7 @@ public class StudioController
         return new ResponseEntity<>(studioService.deleteStudio(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}")
     public ResponseEntity<StudioDTO> updateStudio(@PathVariable Integer id, @RequestBody StudioDTO studioDTO)
     {
         return new ResponseEntity<>(studioService.updateStudio(studioDTO, id), HttpStatus.OK);

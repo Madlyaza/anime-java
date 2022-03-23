@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/json/actors", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/actors", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class ActorController
 {
     private final ActorService actorService;
@@ -32,7 +32,7 @@ public class ActorController
         return new ResponseEntity<>(actorService.getActorsById(id), HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping
     public ResponseEntity<ActorDTO> createActor(@RequestBody ActorDTO actorDTO)
     {
         return new ResponseEntity<>(actorService.createActor(actorDTO), HttpStatus.OK);
@@ -44,9 +44,7 @@ public class ActorController
         return new ResponseEntity<>(actorService.deleteActor(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}")
     public ResponseEntity<ActorDTO> updateActor(@PathVariable Integer id, @RequestBody ActorDTO actorDTO)
     {
         return new ResponseEntity<>(actorService.updateActor(actorDTO, id), HttpStatus.OK);

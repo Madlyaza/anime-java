@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/json/featured", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/featured", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class FeaturedInController
 {
     private final FeaturedInService featuredInService;
@@ -32,7 +32,7 @@ public class FeaturedInController
         return new ResponseEntity<>(featuredInService.getFeaturedById(id), HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping()
     public ResponseEntity<FeaturedInDTO> createFeatured(@RequestBody FeaturedInDTO featuredInDTO)
     {
         return new ResponseEntity<>(featuredInService.createFeatured(featuredInDTO), HttpStatus.OK);
@@ -44,9 +44,7 @@ public class FeaturedInController
         return new ResponseEntity<>(featuredInService.deleteFeatured(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}")
     public ResponseEntity<FeaturedInDTO> updateAnime(@PathVariable Integer id, @RequestBody FeaturedInDTO featuredInDTO)
     {
         return new ResponseEntity<>(featuredInService.updateFeatured(featuredInDTO, id), HttpStatus.OK);

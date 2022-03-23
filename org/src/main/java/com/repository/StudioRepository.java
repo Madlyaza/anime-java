@@ -35,6 +35,7 @@ public class StudioRepository
      */
     public Studio getStudioById(Integer id)
     {
+        System.out.println("Repository  ------------------------------------");
         return manager.find(Studio.class, id);
     }
 

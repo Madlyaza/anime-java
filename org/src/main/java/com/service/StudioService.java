@@ -26,6 +26,7 @@ public class StudioService
 
     public StudioDTO getStudioById(Integer id)
     {
+        System.out.println("Service ------------------------------------");
 //        try
 //        {
             return studioMapper.mapFromEntity(studioRepository.getStudioById(id));

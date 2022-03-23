@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/json/animes", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/animes", produces = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE}, consumes = {MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE})
 public class AnimeController
 {
     private final AnimeService animeService;
@@ -34,7 +34,7 @@ public class AnimeController
         return new ResponseEntity<>(animeService.getAnimeById(id), HttpStatus.OK);
     }
 
-    @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping()
     @ResponseBody
     public ResponseEntity<AnimeDTO> createAnime(@RequestBody AnimeDTO animeDTO)
     {
@@ -47,9 +47,7 @@ public class AnimeController
         return new ResponseEntity<>(animeService.deleteAnime(id), HttpStatus.OK);
     }
 
-    @PutMapping(value = "/{id}",
-            consumes = MediaType.APPLICATION_JSON_VALUE,
-            produces = MediaType.APPLICATION_JSON_VALUE)
+    @PutMapping(value = "/{id}")
     public ResponseEntity<AnimeDTO> updateAnime(@PathVariable Integer id, @RequestBody AnimeDTO animeDTO)
     {
         return new ResponseEntity<>(animeService.updateAnime(animeDTO, id), HttpStatus.OK);
