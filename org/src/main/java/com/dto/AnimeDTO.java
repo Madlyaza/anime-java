@@ -1,18 +1,21 @@
 package com.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.model.Studio;
+import com.util.LocalDateAdapter;
+import com.util.LocalDateDeserializer;
+import com.util.LocalDateSerializer;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -30,9 +33,9 @@ public class AnimeDTO
     @NotNull
     private Integer critic_score;
 
-    @Past
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "CET")
-    private Date release_date;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate release_date;
 
     @XmlElement(name = "id")
     public int getId()
@@ -79,12 +82,13 @@ public class AnimeDTO
     }
 
     @XmlElement(name = "release_date")
-    public Date getRelease_date()
+    public LocalDate getRelease_date()
     {
         return release_date;
     }
 
-    public void setRelease_date(Date release_date)
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setRelease_date(LocalDate release_date)
     {
         this.release_date = release_date;
     }

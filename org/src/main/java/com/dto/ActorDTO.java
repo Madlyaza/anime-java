@@ -1,18 +1,20 @@
 package com.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.model.Studio;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.util.LocalDateAdapter;
+import com.util.LocalDateDeserializer;
+import com.util.LocalDateSerializer;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Date;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -24,9 +26,9 @@ public class ActorDTO
     @NotBlank
     private String name;
 
-    @Past
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy", timezone = "CET")
-    private Date birth_date;
+    @JsonDeserialize(using = LocalDateDeserializer.class)
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate birth_date;
 
     @NotNull
     private String birth_place;
@@ -57,12 +59,13 @@ public class ActorDTO
     }
 
     @XmlElement(name = "birth_date")
-    public Date getBirth_date()
+    public LocalDate getBirth_date()
     {
         return birth_date;
     }
 
-    public void setBirth_date(Date birth_date)
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setBirth_date(LocalDate birth_date)
     {
         this.birth_date = birth_date;
     }
