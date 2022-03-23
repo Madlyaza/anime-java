@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "studio")
@@ -40,4 +40,60 @@ public class Studio
 
     @NotNull
     private String type;
+
+    @XmlElement(name = "id")
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    @XmlElement(name = "name")
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @XmlElement(name = "founded")
+    public LocalDate getFounded()
+    {
+        return founded;
+    }
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setFounded(LocalDate founded)
+    {
+        this.founded = founded;
+    }
+
+    @XmlElement(name = "headquarters")
+    public String getHeadquarters()
+    {
+        return headquarters;
+    }
+
+    public void setHeadquarters(String headquarters)
+    {
+        this.headquarters = headquarters;
+    }
+
+    @XmlElement(name = "type")
+    public String getType()
+    {
+        return type;
+    }
+
+    public void setType(String type)
+    {
+        this.type = type;
+    }
 }

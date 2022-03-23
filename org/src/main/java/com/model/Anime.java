@@ -13,11 +13,11 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "anime")
@@ -41,4 +41,60 @@ public class Anime
     @JsonSerialize(using = LocalDateSerializer.class)
     @Column(name = "release_date", nullable = false)
     private LocalDate release_date;
+
+    @XmlElement(name = "id")
+    public int getId()
+    {
+        return id;
+    }
+
+    public void setId(int id)
+    {
+        this.id = id;
+    }
+
+    @XmlElement(name = "studio")
+    public Studio getStudio()
+    {
+        return studio;
+    }
+
+    public void setStudio(Studio studio)
+    {
+        this.studio = studio;
+    }
+
+    @XmlElement(name = "name")
+    public String getName()
+    {
+        return name;
+    }
+
+    public void setName(String name)
+    {
+        this.name = name;
+    }
+
+    @XmlElement(name = "critic_score")
+    public Integer getCritic_score()
+    {
+        return critic_score;
+    }
+
+    public void setCritic_score(Integer critic_score)
+    {
+        this.critic_score = critic_score;
+    }
+
+    @XmlElement(name = "release_date")
+    public LocalDate getRelease_date()
+    {
+        return release_date;
+    }
+
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    public void setRelease_date(LocalDate release_date)
+    {
+        this.release_date = release_date;
+    }
 }
