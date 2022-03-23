@@ -52,8 +52,6 @@ public class AnimeRepository
      */
     public Anime uploadAnime(Anime anime)
     {
-        System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        System.out.println(anime);
         manager.persist(anime);
         return anime;
     }

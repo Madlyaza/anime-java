@@ -52,7 +52,7 @@
         </createTable>
 
         <addForeignKeyConstraint baseTableName="Anime" baseColumnNames="studio_id" constraintName="Studio_Anime_FK" referencedTableName="Studio"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id" onUpdate="CASCADE" onDelete="CASCADE"/>
 
         <createTable tableName="Actor">
             <column name="id" type="int" autoIncrement="true">
@@ -112,13 +112,12 @@
             </column>
         </createTable>
         <addForeignKeyConstraint baseTableName="FeaturedIn" baseColumnNames="actor_id" constraintName="featured_actor_FK" referencedTableName="Actor"
-                                 referencedColumnNames="id"/>
-        <addUniqueConstraint tableName="anime" columnNames="name"/>
+                                 referencedColumnNames="id" onUpdate="CASCADE" onDelete="CASCADE"/>
     </changeSet>
 
     <changeSet id="4" author="Madlyaza">
         <addForeignKeyConstraint baseTableName="featuredin" baseColumnNames="anime_id" constraintName="anime_id_FK"
                                  referencedTableName="anime"
-                                 referencedColumnNames="id"/>
+                                 referencedColumnNames="id" onUpdate="CASCADE" onDelete="CASCADE"/>
     </changeSet>
 </databaseChangeLog>
