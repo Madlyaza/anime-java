@@ -1,6 +1,9 @@
 package com.service;
 
 import com.dto.StudioDTO;
+import com.exception.BadRequestException;
+import com.exception.DataNotFoundException;
+import com.exception.NoContentException;
 import com.mapper.StudioMapper;
 import com.repository.StudioRepository;
 import org.springframework.stereotype.Service;
@@ -26,50 +29,49 @@ public class StudioService
 
     public StudioDTO getStudioById(Integer id)
     {
-        System.out.println("Service ------------------------------------");
-//        try
-//        {
+        try
+        {
             return studioMapper.mapFromEntity(studioRepository.getStudioById(id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new DataNotFoundException("id: " + id);
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new DataNotFoundException("id: " + id);
+        }
     }
 
     public StudioDTO createStudio(StudioDTO studioDTO)
     {
-//        try
-//        {
+        try
+        {
             return studioMapper.mapFromEntity(studioRepository.uploadStudio(studioMapper.mapToEntity(studioDTO)));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new BadRequestException();
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new BadRequestException();
+        }
     }
 
     public StudioDTO deleteStudio(Integer id)
     {
-//        try
-//        {
+        try
+        {
             return studioMapper.mapFromEntity(studioRepository.deleteStudio(id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new NoContentException("id: " + id);
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new NoContentException("id: " + id);
+        }
     }
 
     public StudioDTO updateStudio(StudioDTO studioDTO, Integer id)
     {
-//        try
-//        {
+        try
+        {
             return studioMapper.mapFromEntity(studioRepository.updateStudio(studioMapper.mapToEntity(studioDTO), id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new BadRequestException();
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new BadRequestException();
+        }
     }
 }

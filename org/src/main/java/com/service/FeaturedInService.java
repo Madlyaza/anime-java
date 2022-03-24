@@ -1,6 +1,9 @@
 package com.service;
 
 import com.dto.FeaturedInDTO;
+import com.exception.BadRequestException;
+import com.exception.DataNotFoundException;
+import com.exception.NoContentException;
 import com.mapper.FeaturedInMapper;
 import com.repository.FeaturedInRepository;
 import org.springframework.stereotype.Service;
@@ -26,49 +29,49 @@ public class FeaturedInService
 
     public FeaturedInDTO getFeaturedById(Integer id)
     {
-//        try
-//        {
+        try
+        {
             return featuredInMapper.mapFromEntity( featuredInRepository.getFeaturedById(id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new DataNotFoundException("id: " + id);
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new DataNotFoundException("id: " + id);
+        }
     }
 
     public FeaturedInDTO createFeatured(FeaturedInDTO featuredInDTO)
     {
-//        try
-//        {
+        try
+        {
             return featuredInMapper.mapFromEntity(featuredInRepository.uploadFeatured(featuredInMapper.mapToEntity(featuredInDTO)));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new BadRequestException();
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new BadRequestException();
+        }
     }
 
     public FeaturedInDTO deleteFeatured(Integer id)
     {
-//        try
-//        {
+        try
+        {
             return featuredInMapper.mapFromEntity(featuredInRepository.deleteFeatured(id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new NoContentException("id: " + id);
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new NoContentException("id: " + id);
+        }
     }
 
     public FeaturedInDTO updateFeatured(FeaturedInDTO featuredInDTO, Integer id)
     {
-//        try
-//        {
+        try
+        {
             return featuredInMapper.mapFromEntity(featuredInRepository.updateFeatured(featuredInMapper.mapToEntity(featuredInDTO), id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new BadRequestException();
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new BadRequestException();
+        }
     }
 }

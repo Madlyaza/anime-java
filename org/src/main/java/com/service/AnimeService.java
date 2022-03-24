@@ -1,6 +1,9 @@
 package com.service;
 
 import com.dto.AnimeDTO;
+import com.exception.BadRequestException;
+import com.exception.DataNotFoundException;
+import com.exception.NoContentException;
 import com.mapper.AnimeMapper;
 import com.repository.AnimeRepository;
 import org.springframework.stereotype.Service;
@@ -26,49 +29,49 @@ public class AnimeService
 
     public AnimeDTO getAnimeById(Integer id)
     {
-//        try
-//        {
+        try
+        {
             return animeMapper.mapFromEntity(animeRepository.getAnimeById(id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new DataNotFoundException("id: " + id);
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new DataNotFoundException("id: " + id);
+        }
     }
 
     public AnimeDTO createAnime(AnimeDTO animeDTO)
     {
-//        try
-//        {
+        try
+        {
             return animeMapper.mapFromEntity(animeRepository.uploadAnime(animeMapper.mapToEntity(animeDTO)));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new BadRequestException();
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new BadRequestException();
+        }
     }
 
     public AnimeDTO deleteAnime(Integer id)
     {
-//        try
-//        {
+        try
+        {
             return animeMapper.mapFromEntity(animeRepository.deleteAnime(id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new NoContentException("id: " + id);
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new NoContentException("id: " + id);
+        }
     }
 
     public AnimeDTO updateAnime(AnimeDTO animeDTO, Integer id)
     {
-//        try
-//        {
+        try
+        {
             return animeMapper.mapFromEntity(animeRepository.updateAnime(animeMapper.mapToEntity(animeDTO), id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new BadRequestException();
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new BadRequestException();
+        }
     }
 }

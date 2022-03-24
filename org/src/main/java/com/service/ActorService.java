@@ -1,6 +1,9 @@
 package com.service;
 
 import com.dto.ActorDTO;
+import com.exception.BadRequestException;
+import com.exception.DataNotFoundException;
+import com.exception.NoContentException;
 import com.mapper.ActorMapper;
 import com.repository.ActorRepository;
 import org.springframework.stereotype.Service;
@@ -26,49 +29,49 @@ public class ActorService
 
     public ActorDTO getActorsById(Integer id)
     {
-//        try
-//        {
+        try
+        {
             return actorMapper.mapFromEntity(actorRepository.getActorById(id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new DataNotFoundException("id: " + id);
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new DataNotFoundException("id: " + id);
+        }
     }
 
     public ActorDTO createActor(ActorDTO actorDTO)
     {
-//        try
-//        {
+        try
+        {
             return actorMapper.mapFromEntity(actorRepository.uploadActor(actorMapper.mapToEntity(actorDTO)));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new BadRequestException();
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new BadRequestException();
+        }
     }
 
     public ActorDTO deleteActor(Integer id)
     {
-//        try
-//        {
+        try
+        {
             return actorMapper.mapFromEntity(actorRepository.deleteActor(id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new NoContentException("id: " + id);
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new NoContentException("id: " + id);
+        }
     }
 
     public ActorDTO updateActor(ActorDTO actorDTO, Integer id)
     {
-//        try
-//        {
+        try
+        {
             return actorMapper.mapFromEntity(actorRepository.updateActor(actorMapper.mapToEntity(actorDTO), id));
-//        }
-//        catch (Exception ex)
-//        {
-//            throw new BadRequestException();
-//        }
+        }
+        catch (Exception ex)
+        {
+            throw new BadRequestException();
+        }
     }
 }
