@@ -14,10 +14,12 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 import javax.servlet.http.HttpServletRequest;
 
 @RestControllerAdvice
-public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
+public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler
+{
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     @ExceptionHandler(BadRequestException.class)
-    public ErrorMessage badRequestException(BadRequestException exception, HttpServletRequest request) {
+    public ErrorMessage badRequestException(BadRequestException exception, HttpServletRequest request)
+    {
         return new ErrorMessage(String.format(exception.getMessage()));
     }
 
@@ -37,6 +39,12 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     @ExceptionHandler(RuntimeException.class)
     public ErrorMessage generalException(RuntimeException exception) {
         return new ErrorMessage("Something went wrong when executing the request.");
+    }
+
+    @ResponseStatus(HttpStatus.LOCKED)
+    @ExceptionHandler(ValidationFailedException.class)
+    public ErrorMessage validationFailedException(ValidationFailedException exception) {
+        return new ErrorMessage(String.format(exception.getMessage()));
     }
 
     @Override

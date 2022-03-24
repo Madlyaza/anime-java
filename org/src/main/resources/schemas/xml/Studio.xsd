@@ -4,6 +4,13 @@
 	<xs:element name="studio">
 		<xs:complexType>
 		  <xs:sequence>
+			  <xs:element name="name">
+				  <xs:simpleType>
+					  <xs:restriction base="xs:string">
+						  <xs:maxLength value="50"/>
+					  </xs:restriction>
+				  </xs:simpleType>
+			  </xs:element>
 			<xs:element name="founded">
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
@@ -15,13 +22,6 @@
 				<xs:simpleType>
 					<xs:restriction base="xs:string">
 						<xs:maxLength value="100"/>
-					</xs:restriction>
-				</xs:simpleType>
-			</xs:element>
-			<xs:element name="name">
-				<xs:simpleType>
-					<xs:restriction base="xs:string">
-						<xs:maxLength value="50"/>
 					</xs:restriction>
 				</xs:simpleType>
 			</xs:element>
