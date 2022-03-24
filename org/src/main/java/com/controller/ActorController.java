@@ -1,6 +1,7 @@
 package com.controller;
 
 import com.dto.ActorDTO;
+import com.dto.AnimeDTO;
 import com.dto.StudioDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.service.ActorService;
@@ -15,9 +16,11 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,9 +36,39 @@ public class ActorController
     }
 
     @GetMapping()
-    public ResponseEntity<List<ActorDTO>> getActors()
+    public ResponseEntity getActors(HttpServletRequest servletRequest)
     {
-        return new ResponseEntity<>(actorService.getActors(), HttpStatus.OK);
+        if (servletRequest.getContentType().equals("application/json"))
+        {
+            return new ResponseEntity<>(actorService.getActors(), HttpStatus.OK);
+        }
+        else if(servletRequest.getContentType().equals("application/xml"))
+        {
+            try
+            {
+                JAXBContext context = JAXBContext.newInstance(ActorDTO.class);
+                Marshaller marshaller = context.createMarshaller();
+                StringWriter stringWriter = new StringWriter();
+                List<ActorDTO> list = actorService.getActors();
+                int counter = 0;
+                for (ActorDTO actorDTO:list)
+                {
+                    if(counter == 1)
+                    {
+                        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+                    }
+                    marshaller.marshal(actorDTO, stringWriter);
+                    counter++;
+                }
+
+                return new ResponseEntity<>(stringWriter.toString(), HttpStatus.OK);
+            }
+            catch (JAXBException e)
+            {
+                throw new RuntimeException();
+            }
+        }
+        throw new RuntimeException();
     }
 
     @GetMapping("/{id}")

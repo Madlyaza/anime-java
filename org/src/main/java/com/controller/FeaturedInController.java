@@ -15,9 +15,11 @@ import org.springframework.web.util.ContentCachingRequestWrapper;
 import javax.servlet.http.HttpServletRequest;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
 import java.io.IOException;
 import java.io.StringReader;
+import java.io.StringWriter;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -33,9 +35,39 @@ public class FeaturedInController
     }
 
     @GetMapping()
-    public ResponseEntity<List<FeaturedInDTO>> getFeatured()
+    public ResponseEntity getFeatured(HttpServletRequest servletRequest)
     {
-        return new ResponseEntity<>(featuredInService.getFeatured(), HttpStatus.OK);
+        if (servletRequest.getContentType().equals("application/json"))
+        {
+            return new ResponseEntity<>(featuredInService.getFeatured(), HttpStatus.OK);
+        }
+        else if(servletRequest.getContentType().equals("application/xml"))
+        {
+            try
+            {
+                JAXBContext context = JAXBContext.newInstance(FeaturedInDTO.class);
+                Marshaller marshaller = context.createMarshaller();
+                StringWriter stringWriter = new StringWriter();
+                List<FeaturedInDTO> list = featuredInService.getFeatured();
+                int counter = 0;
+                for (FeaturedInDTO featuredInDTO:list)
+                {
+                    if(counter == 1)
+                    {
+                        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
+                    }
+                    marshaller.marshal(featuredInDTO, stringWriter);
+                    counter++;
+                }
+
+                return new ResponseEntity<>(stringWriter.toString(), HttpStatus.OK);
+            }
+            catch (JAXBException e)
+            {
+                throw new RuntimeException();
+            }
+        }
+        throw new RuntimeException();
     }
 
     @GetMapping("/{id}")
