@@ -117,7 +117,7 @@ public class FeaturedInController
     private FeaturedInDTO Validation(ContentCachingRequestWrapper request) throws IOException, JAXBException
     {
         String inputString = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
-        String schemaName = "featuredIn";
+        String schemaName = "FeaturedIn";
         FeaturedInDTO featuredInDTO = null;
 
         if(request.getContentType().equals("application/json"))
