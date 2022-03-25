@@ -14,12 +14,15 @@ For the purposes of keeping this installation simple we are going to assume you 
 First you must clone or download the repository, you can save the code wherever you would like we suggest you put it in an empty folder to not create unforeseen problems.
 
 ### 1.2 Install Java
-Make sure that Java is installed on your mahcine and updated since we will need ti for the next step, if not you can find downloads [here](https://www.java.com/nl/download/manual.jsp). 
+Make sure that Java is installed on your machine and updated since we will need it for the next steps, if not you can find downloads [here](https://www.java.com/nl/download/manual.jsp). 
 
-### 1.3 Install Tomcat
+### 1.3 Install Xampp
+Make sure that Xampp is installed on your machine and updated sinve we will need it to run the database.
+
+### 1.4 Install Tomcat
 I use [Tomcat 9.0.56](https://tomcat.apache.org/download-90.cgi) as a means of running the API, it is required for running the API.
 
-### 1.4 Change Application.properties
+### 1.5 Change Application.properties
 To make sure the database connection is correct you must edit the Application.properties file. This file should be located inside ```src/main/resources```. If it is not here you can manually create it.
 
 * **database.username**: This is the login name for Xampp, you can change this to whatever your Xampp uses.
@@ -30,24 +33,24 @@ database.username=[Username]
 database.password=[Password]
 ```
 
-### 1.5 Creating the database
+### 1.6 Creating the database
 We will create the database by using Xampp. Execute the following query inside ```localhost/phpmyadmin```.
 
 ```mysql
 CREATE DATABASE animedatabase;
 ```
 
-### 1.6 Running the API
+### 1.7 Running the API
 First open intellij and select as your project org. Then build the application to ensure no errors are encountered.
 
 Next navigate to the run anything window in the top right and execute ```mvn clean verify cargo:run```
 
 After at max a few minutes of startup messages it should be running and you can navigate to the application under the normal ```localhost:8080```
 
-### 1.7 Running the consumer website
+### 1.8 Running the consumer website
 Place the file called ```index.php``` into your Xampp htdocs folder. I advise you make a new folder inside the htdocs folder to keep it organized and then place the index.php in this new folder.
 
-### 1.8 (OPTIONAL) Adding data to the database
+### 1.9 (OPTIONAL) Adding data to the database
 If you want to populate the tables with some data you can follow this step.
 
 First make sure you did step 1.6. If you have not launched the application then there database tables have not been created yet and thus the tables cannot be filled with data.
