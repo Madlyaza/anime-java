@@ -33,6 +33,12 @@ public class StudioController
         this.studioService = studioService;
     }
 
+
+    /**
+     * Returns a list of all studios.
+     *
+     * @return response entity with list of all studios
+     */
     @GetMapping()
     public ResponseEntity getStudios(HttpServletRequest servletRequest)
     {
@@ -68,12 +74,24 @@ public class StudioController
         throw new RuntimeException();
     }
 
+    /**
+     * Returns a single studio.
+     *
+     * @param id of the studio to find
+     * @return response entity with single studio
+     */
     @GetMapping("/{id}")
     public ResponseEntity<StudioDTO> getStudioById(@PathVariable Integer id)
     {
         return new ResponseEntity<>(studioService.getStudioById(id), HttpStatus.OK);
     }
 
+    /**
+     * Post a single studio.
+     *
+     * @param servletRequest request data to post
+     * @return response entity with posted studio
+     */
     @PostMapping()
     public ResponseEntity createStudio(HttpServletRequest servletRequest)
     {
@@ -90,12 +108,25 @@ public class StudioController
         }
     }
 
+    /**
+     * Delete a single studio.
+     *
+     * @param id of the studio to delete
+     * @return response entity with deleted studio
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<StudioDTO> deleteStudio(@PathVariable Integer id)
     {
         return new ResponseEntity<>(studioService.deleteStudio(id), HttpStatus.OK);
     }
 
+    /**
+     * Put a single studio.
+     *
+     * @param id of the studio to put
+     * @param servletRequest request data to put
+     * @return response entity with put studio
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity updateStudio(@PathVariable Integer id, HttpServletRequest servletRequest)
     {
@@ -112,6 +143,12 @@ public class StudioController
         }
     }
 
+    /**
+     * validates the XML or JSON against the schemas.
+     *
+     * @param request with the data of the post or put
+     * @return StudioDTO with the put or post studio
+     */
     private StudioDTO Validation(ContentCachingRequestWrapper request) throws IOException, JAXBException
     {
         String inputString = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));

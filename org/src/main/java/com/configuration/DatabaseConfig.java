@@ -15,6 +15,8 @@ import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
 import java.util.Properties;
 
+
+// Configures the Database so that it works.
 @EnableTransactionManagement
 @Configuration
 @EnableJpaRepositories("com.repository")

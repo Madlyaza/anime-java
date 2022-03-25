@@ -35,6 +35,11 @@ public class ActorController
         this.actorService = actorService;
     }
 
+    /**
+     * Returns a list of all actors.
+     *
+     * @return response entity with list of all actors
+     */
     @GetMapping()
     public ResponseEntity getActors(HttpServletRequest servletRequest)
     {
@@ -69,12 +74,24 @@ public class ActorController
         throw new RuntimeException();
     }
 
+    /**
+     * Returns a single actor.
+     *
+     * @param id of the actor to find
+     * @return response entity with single actor
+     */
     @GetMapping("/{id}")
     public ResponseEntity<ActorDTO> getActorByID(@PathVariable Integer id)
     {
         return new ResponseEntity<>(actorService.getActorsById(id), HttpStatus.OK);
     }
 
+    /**
+     * Post a single actor.
+     *
+     * @param servletRequest request data to post
+     * @return response entity with posted anime
+     */
     @PostMapping
     public ResponseEntity createActor(HttpServletRequest servletRequest)
     {
@@ -90,12 +107,25 @@ public class ActorController
         }
     }
 
+    /**
+     * Delete a single actor.
+     *
+     * @param id of the actor to delete
+     * @return response entity with deleted actor
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<ActorDTO> deleteActor(@PathVariable Integer id)
     {
         return new ResponseEntity<>(actorService.deleteActor(id), HttpStatus.OK);
     }
 
+    /**
+     * Put a single actor.
+     *
+     * @param id of the actor to put
+     * @param servletRequest request data to put
+     * @return response entity with put actor
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity updateActor(@PathVariable Integer id, HttpServletRequest servletRequest)
     {
@@ -111,6 +141,12 @@ public class ActorController
         }
     }
 
+    /**
+     * validates the XML or JSON against the schemas.
+     *
+     * @param request with the data of the post or put
+     * @return ActorDTO with the put or post actor
+     */
     private ActorDTO Validation(ContentCachingRequestWrapper request) throws IOException, JAXBException
     {
         String inputString = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));

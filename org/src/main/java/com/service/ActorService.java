@@ -22,11 +22,22 @@ public class ActorService
         this.actorRepository = actorRepository;
     }
 
+    /**
+     * Maps Entity to DTO and returns a list of all actors.
+     *
+     * @return response entity with list of all actors
+     */
     public List<ActorDTO> getActors()
     {
         return actorMapper.mapFromEntityList(actorRepository.getActors());
     }
 
+    /**
+     * Maps Entity to DTO and returns a single actor.
+     *
+     * @param id id of the actor to find
+     * @return response entity with single actor
+     */
     public ActorDTO getActorsById(Integer id)
     {
         try
@@ -39,6 +50,12 @@ public class ActorService
         }
     }
 
+    /**
+     * Maps Entity to DTO and posts a single actor.
+     *
+     * @param actorDTO actor to post
+     * @return response entity with posted actor
+     */
     public ActorDTO createActor(ActorDTO actorDTO)
     {
         try
@@ -51,6 +68,12 @@ public class ActorService
         }
     }
 
+    /**
+     * Maps Entity to DTO and deletes a single actor.
+     *
+     * @param id of the actor to delete
+     * @return response entity with deleted actor
+     */
     public ActorDTO deleteActor(Integer id)
     {
         try
@@ -63,6 +86,13 @@ public class ActorService
         }
     }
 
+    /**
+     * Maps Entity to DTO and puts a single actor.
+     *
+     * @param id of the actor to put
+     * @param actorDTO actor to put
+     * @return response entity with put actor
+     */
     public ActorDTO updateActor(ActorDTO actorDTO, Integer id)
     {
         try

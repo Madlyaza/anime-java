@@ -2,6 +2,8 @@ package com.configuration;
 
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+// Initializes the application, think of it as the Main
+
 public class ApplicationInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
     @Override

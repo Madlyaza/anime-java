@@ -34,6 +34,11 @@ public class FeaturedInController
         this.featuredInService = featuredInService;
     }
 
+    /**
+     * Returns a list of all featuredIn.
+     *
+     * @return response entity with list of all featuredIn
+     */
     @GetMapping()
     public ResponseEntity getFeatured(HttpServletRequest servletRequest)
     {
@@ -69,12 +74,24 @@ public class FeaturedInController
         throw new RuntimeException();
     }
 
+    /**
+     * Returns a single featuredIn.
+     *
+     * @param id of the featuredIn to find
+     * @return response entity with single featuredIn
+     */
     @GetMapping("/{id}")
     public ResponseEntity<FeaturedInDTO> getFeaturedById(@PathVariable Integer id)
     {
         return new ResponseEntity<>(featuredInService.getFeaturedById(id), HttpStatus.OK);
     }
 
+    /**
+     * Post a single featuredIn.
+     *
+     * @param servletRequest request data to post
+     * @return response entity with posted featuredIn
+     */
     @PostMapping()
     public ResponseEntity createFeatured(HttpServletRequest servletRequest)
     {
@@ -91,12 +108,25 @@ public class FeaturedInController
         }
     }
 
+    /**
+     * Delete a single featuredIn.
+     *
+     * @param id of the featuredIn to delete
+     * @return response entity with deleted featuredin
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<FeaturedInDTO> deleteFeatured(@PathVariable Integer id)
     {
         return new ResponseEntity<>(featuredInService.deleteFeatured(id), HttpStatus.OK);
     }
 
+    /**
+     * Put a single featuredIn.
+     *
+     * @param id of the featuredIn to put
+     * @param servletRequest request data to put
+     * @return response entity with put featuredIn
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity updateAnime(@PathVariable Integer id, HttpServletRequest servletRequest)
     {
@@ -113,6 +143,12 @@ public class FeaturedInController
         }
     }
 
+    /**
+     * validates the XML or JSON against the schemas.
+     *
+     * @param request with the data of the post or put
+     * @return FeaturedInDTO with the put or post featuredIn
+     */
     private FeaturedInDTO Validation(ContentCachingRequestWrapper request) throws IOException, JAXBException
     {
         String inputString = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));

@@ -34,6 +34,12 @@ public class AnimeController
         this.animeService = animeService;
     }
 
+
+    /**
+     * Returns a list of all animes.
+     *
+     * @return response entity with list of all animes
+     */
     @GetMapping()
     @ResponseBody
     public ResponseEntity getAnime(HttpServletRequest servletRequest)
@@ -69,6 +75,12 @@ public class AnimeController
         throw new RuntimeException();
     }
 
+    /**
+     * Returns a single anime.
+     *
+     * @param id of the anime to find
+     * @return response entity with single anime
+     */
     @GetMapping("/{id}")
     @ResponseBody
     public ResponseEntity<AnimeDTO> getAnimeByID(@PathVariable Integer id)
@@ -76,6 +88,12 @@ public class AnimeController
         return new ResponseEntity<>(animeService.getAnimeById(id), HttpStatus.OK);
     }
 
+    /**
+     * Post a single anime.
+     *
+     * @param servletRequest request data to post
+     * @return response entity with posted anime
+     */
     @PostMapping()
     @ResponseBody
     public ResponseEntity createAnime(HttpServletRequest servletRequest)
@@ -92,12 +110,25 @@ public class AnimeController
         }
     }
 
+    /**
+     * Delete a single anime.
+     *
+     * @param id of the anime to delete
+     * @return response entity with deleted anime
+     */
     @DeleteMapping("/{id}")
     public ResponseEntity<AnimeDTO> deleteAnime(@PathVariable Integer id)
     {
         return new ResponseEntity<>(animeService.deleteAnime(id), HttpStatus.OK);
     }
 
+    /**
+     * Put a single anime.
+     *
+     * @param id of the anime to put
+     * @param servletRequest request data to put
+     * @return response entity with put anime
+     */
     @PutMapping(value = "/{id}")
     public ResponseEntity updateAnime(@PathVariable Integer id, HttpServletRequest servletRequest)
     {
@@ -113,6 +144,13 @@ public class AnimeController
         }
     }
 
+
+    /**
+     * validates the XML or JSON against the schemas.
+     *
+     * @param request with the data of the post or put
+     * @return AnimeDTO with the put or post anime
+     */
     private AnimeDTO Validation(ContentCachingRequestWrapper request) throws IOException, JAXBException
     {
         String inputString = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));

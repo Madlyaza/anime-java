@@ -22,11 +22,22 @@ public class FeaturedInService
         this.featuredInMapper = featuredInMapper;
     }
 
+    /**
+     * Maps Entity to DTO and returns a list of all featuredIn.
+     *
+     * @return response entity with list of all featuredIn
+     */
     public List<FeaturedInDTO> getFeatured()
     {
         return featuredInMapper.mapFromEntityList(featuredInRepository.getFeatured());
     }
 
+    /**
+     * Maps Entity to DTO and returns a single featuredIn.
+     *
+     * @param id id of the featuredIn to find
+     * @return response entity with single featuredIn
+     */
     public FeaturedInDTO getFeaturedById(Integer id)
     {
         try
@@ -39,6 +50,12 @@ public class FeaturedInService
         }
     }
 
+    /**
+     * Maps Entity to DTO and posts a single featuredIn.
+     *
+     * @param featuredInDTO featuredIn to post
+     * @return response entity with posted featuredIn
+     */
     public FeaturedInDTO createFeatured(FeaturedInDTO featuredInDTO)
     {
         try
@@ -51,6 +68,12 @@ public class FeaturedInService
         }
     }
 
+    /**
+     * Maps Entity to DTO and deletes a single featuredIn.
+     *
+     * @param id of the featuredIn to delete
+     * @return response entity with deleted featuredIn
+     */
     public FeaturedInDTO deleteFeatured(Integer id)
     {
         try
@@ -63,6 +86,13 @@ public class FeaturedInService
         }
     }
 
+    /**
+     * Maps Entity to DTO and puts a single featuredIn.
+     *
+     * @param id of the featuredIn to put
+     * @param featuredInDTO featuredIn to put
+     * @return response entity with put featuredIn
+     */
     public FeaturedInDTO updateFeatured(FeaturedInDTO featuredInDTO, Integer id)
     {
         try
