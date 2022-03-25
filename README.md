@@ -44,7 +44,7 @@ CREATE DATABASE animedatabase;
 ### 1.7 Project SDK
 Go to project settings in Intellij and configure the project SDK.
 
-In the top left click File -> Project Structure -> Project -> SDK -> Select a JDK (16 was used during development) You can also download one here if you do not have it currently.
+In the top left click File -> Project Structure -> Project -> SDK -> Select a JDK (1.8.0_181 was used during development) You can also download one here if you do not have it currently.
 
 ### 1.8 Running the API
 First open intellij and select as your project org. Then build the application to ensure no errors are encountered.
