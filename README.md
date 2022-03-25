@@ -190,4 +190,7 @@ xml
 ```
 
 
+## Additional Information
+The last thing provided in the github is an export of the postman requests used during the testing of the API.
 
+This is not formatted to be "nice looking" and was not tested to be re-added into postman. But i thought i would supply the export file nonetheless for if you would want to use it. The data inside is 100% test data and might have dumb, weird or wrong data since it was used for testing. But it can be used to get a better idea of what is going with the API.
