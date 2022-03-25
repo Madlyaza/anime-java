@@ -1,8 +1,10 @@
 package com.configuration;
 
 import liquibase.integration.spring.SpringLiquibase;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -19,17 +21,24 @@ import java.util.Properties;
 // Configures the Database so that it works.
 @EnableTransactionManagement
 @Configuration
+@PropertySource("classpath:application.properties")
 @EnableJpaRepositories("com.repository")
 public class DatabaseConfig
 {
+    @Value("${database.username}")
+    private String databaseName;
+
+    @Value("${database.password}")
+    private String databasePassword;
+
     @Bean
     public DataSource datasource()
     {
         DriverManagerDataSource ds = new DriverManagerDataSource();
         ds.setDriverClassName("com.mysql.jdbc.Driver");
         ds.setUrl("jdbc:mysql://127.0.0.1:3306/animeDatabase");
-        ds.setUsername("root");
-        ds.setPassword("");
+        ds.setUsername(databaseName);
+        ds.setPassword(databasePassword);
 
         return ds;
     }
