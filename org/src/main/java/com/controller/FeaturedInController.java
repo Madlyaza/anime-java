@@ -47,18 +47,17 @@ public class FeaturedInController
             {
                 JAXBContext context = JAXBContext.newInstance(FeaturedInDTO.class);
                 Marshaller marshaller = context.createMarshaller();
+                marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
                 StringWriter stringWriter = new StringWriter();
+                stringWriter.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+                stringWriter.append("<root>");
                 List<FeaturedInDTO> list = featuredInService.getFeatured();
-                int counter = 0;
+
                 for (FeaturedInDTO featuredInDTO:list)
                 {
-                    if(counter == 1)
-                    {
-                        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-                    }
                     marshaller.marshal(featuredInDTO, stringWriter);
-                    counter++;
                 }
+                stringWriter.append("</root>");
 
                 return new ResponseEntity<>(stringWriter.toString(), HttpStatus.OK);
             }

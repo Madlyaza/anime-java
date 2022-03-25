@@ -48,18 +48,16 @@ public class AnimeController
             {
                 JAXBContext context = JAXBContext.newInstance(AnimeDTO.class);
                 Marshaller marshaller = context.createMarshaller();
+                marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
                 StringWriter stringWriter = new StringWriter();
+                stringWriter.append("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"yes\"?>");
+                stringWriter.append("<root>");
                 List<AnimeDTO> list = animeService.getAnime();
-                int counter = 0;
                 for (AnimeDTO animeDTO:list)
                 {
-                    if(counter == 1)
-                    {
-                        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, Boolean.TRUE);
-                    }
                     marshaller.marshal(animeDTO, stringWriter);
-                    counter++;
                 }
+                stringWriter.append("</root>");
 
                 return new ResponseEntity<>(stringWriter.toString(), HttpStatus.OK);
             }
