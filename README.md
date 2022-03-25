@@ -41,17 +41,22 @@ We will create the database by using Xampp. Execute the following query inside `
 CREATE DATABASE animedatabase;
 ```
 
-### 1.7 Running the API
+### 1.7 Project SDK
+Go to project settings in Intellij and configure the project SDK.
+
+In the top left click File -> Project Structure -> Project -> SDK -> Select a JDK (16 was used during development) You can also download one here if you do not have it currently.
+
+### 1.8 Running the API
 First open intellij and select as your project org. Then build the application to ensure no errors are encountered.
 
 Next navigate to the run anything window in the top right and execute ```mvn clean verify cargo:run```
 
 After at max a few minutes of startup messages it should be running and you can navigate to the application under the normal ```localhost:8080```
 
-### 1.8 Running the consumer website
+### 1.9 Running the consumer website
 Place the file called ```index.php``` into your Xampp htdocs folder. I advise you make a new folder inside the htdocs folder to keep it organized and then place the index.php in this new folder.
 
-### 1.9 (OPTIONAL) Adding data to the database
+### 1.10 (OPTIONAL) Adding data to the database
 If you want to populate the tables with some data you can follow this step.
 
 First make sure you did step 1.6. If you have not launched the application then there database tables have not been created yet and thus the tables cannot be filled with data.
