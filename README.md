@@ -5,6 +5,7 @@ Credits: _Robbie Eijkelkamp 4572637_
 
 * [User Guide for setup](https://github.com/Madlyaza/anime-java#user-guide-for-setup)
 * [User Guide for using](https://github.com/Madlyaza/anime-java#user-guide-for-using)
+* [Additional Information](https://github.com/Madlyaza/anime-java#additional-information)
  
 ## User Guide for setup
 This is the user guide for setting up the API and front end consuming program.
